@@ -12,7 +12,7 @@ public class Credenciales {
 			this.password = _password;
 		else {
 			if (password == "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") {
-				JOptionPane.showMessageDialog(null, "OOOPS... ESO NO HA FUNCIONADO ??");
+				JOptionPane.showMessageDialog(null, "OOOPS, ESO NO HA FUNCIONADO","ERROR",JOptionPane.ERROR_MESSAGE");
 			}
 		}
 

@@ -8,6 +8,7 @@ VERDE = Fore.GREEN
 
 lampp_instalado = False
 java_11_instalado = False
+servidor_SQL = False
 
 def imprime_bonito(cadena):
     print(f"{CIAN}=============================================================================================")
@@ -66,19 +67,25 @@ def comprobar_java():
             exit()
 
 def comprobar_dependencias():
-    comprobar_lampp()
-    comprobar_java()
-    correcto = (lampp_instalado and java_11_instalado)
+    if servidor_SQL:
+        comprobar_lampp()
+        comprobar_java()
+        correcto = (lampp_instalado and java_11_instalado)
+    else:
+        comprobar_java()
+        correcto = java_11_instalado
     return correcto
 
 def main():
+    servidor_SQL = pedirCadena("DESEA ACTUAR COMO SERVIDOR SQL? [S/n]")[0].upper() == 'S'
     comprobar_dependencias()
-    imprime_bonito("LANZANDO LAMPP")
-    gestionar_lampp("I")
+    if servidor_SQL :
+        imprime_bonito("LANZANDO LAMPP")
+        gestionar_lampp("I")
     imprime_bonito("LANZANDO APLICACION")
-    pedirCadena("CUANDO CIERRE LA APLICACIÓN SE DETENDRÁN LOS SERVICIOS.\nPulse Intro para continuar.")
     os.system("java -jar EjercicioPPS.jar")
-    gestionar_lampp("P")
+    if servidor_SQL :
+        gestionar_lampp("P")
 
 if __name__ == '__main__':
     main()
